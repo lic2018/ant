@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ant.app.dao.RoleDao">
+  <resultMap id="BaseResultMap" type="com.ant.app.entity.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="object_uuid" jdbcType="CHAR" property="objectUuid" />
+    <result column="rolecode" jdbcType="CHAR" property="rolecode" />
+    <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="module_ids" jdbcType="VARCHAR" property="moduleIds" />
+    <result column="app_module_ids" jdbcType="VARCHAR" property="appModuleIds" />
+    <result column="is_deleted" jdbcType="CHAR" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_login" jdbcType="CHAR" property="isLogin" />
+    <result column="creator_uuid" jdbcType="CHAR" property="creatorUuid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, object_uuid, rolecode, rolename, description, module_ids, app_module_ids, is_deleted, 
+    create_time, modify_time, is_login, creator_uuid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.Role" useGeneratedKeys="true">
+    insert into p_role (object_uuid, rolecode, rolename, 
+      description, module_ids, app_module_ids, 
+      is_deleted, create_time, modify_time, 
+      is_login, creator_uuid)
+    values (#{objectUuid,jdbcType=CHAR}, #{rolecode,jdbcType=CHAR}, #{rolename,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{moduleIds,jdbcType=VARCHAR}, #{appModuleIds,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{isLogin,jdbcType=CHAR}, #{creatorUuid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.Role" useGeneratedKeys="true">
+    insert into p_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="objectUuid != null">
+        object_uuid,
+      </if>
+      <if test="rolecode != null">
+        rolecode,
+      </if>
+      <if test="rolename != null">
+        rolename,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="moduleIds != null">
+        module_ids,
+      </if>
+      <if test="appModuleIds != null">
+        app_module_ids,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="isLogin != null">
+        is_login,
+      </if>
+      <if test="creatorUuid != null">
+        creator_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="objectUuid != null">
+        #{objectUuid,jdbcType=CHAR},
+      </if>
+      <if test="rolecode != null">
+        #{rolecode,jdbcType=CHAR},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIds != null">
+        #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="appModuleIds != null">
+        #{appModuleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLogin != null">
+        #{isLogin,jdbcType=CHAR},
+      </if>
+      <if test="creatorUuid != null">
+        #{creatorUuid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ant.app.entity.Role">
+    update p_role
+    <set>
+      <if test="objectUuid != null">
+        object_uuid = #{objectUuid,jdbcType=CHAR},
+      </if>
+      <if test="rolecode != null">
+        rolecode = #{rolecode,jdbcType=CHAR},
+      </if>
+      <if test="rolename != null">
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIds != null">
+        module_ids = #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="appModuleIds != null">
+        app_module_ids = #{appModuleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLogin != null">
+        is_login = #{isLogin,jdbcType=CHAR},
+      </if>
+      <if test="creatorUuid != null">
+        creator_uuid = #{creatorUuid,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ant.app.entity.Role">
+    update p_role
+    set object_uuid = #{objectUuid,jdbcType=CHAR},
+      rolecode = #{rolecode,jdbcType=CHAR},
+      rolename = #{rolename,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      module_ids = #{moduleIds,jdbcType=VARCHAR},
+      app_module_ids = #{appModuleIds,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      is_login = #{isLogin,jdbcType=CHAR},
+      creator_uuid = #{creatorUuid,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
