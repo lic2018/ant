@@ -1,5 +1,9 @@
 package com.ant.app.entity;
 
+import lombok.ToString;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +12,8 @@ import java.util.Date;
  * p_role
  * @author 
  */
+@ToString
+@Validated
 public class Role implements Serializable {
     /**
      * 自增ID
@@ -17,6 +23,7 @@ public class Role implements Serializable {
     /**
      * 服务客户UUID
      */
+    @NotBlank(message = "请求参数objectUuid不能为空")
     private String objectUuid;
 
     /**
