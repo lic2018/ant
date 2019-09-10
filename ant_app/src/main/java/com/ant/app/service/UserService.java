@@ -1,6 +1,8 @@
 package com.ant.app.service;
 
-import com.ant.app.entity.Role;
+import com.ant.app.Request.LoginRequest;
+import com.ant.app.entity.User;
+import com.ant.bean.Result;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -12,7 +14,9 @@ import javax.validation.Valid;
 @Validated
 public interface UserService {
 
-    Role findById(Integer id);
+//    User findById(Integer id);
+//
+//    Integer insert(@Valid User User);
 
-    Integer insert(@Valid Role role);
+    Result login(@Valid LoginRequest user);
 }
