@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -36,7 +35,7 @@ public class UserServiceImple implements UserService {
             Date date = new Date();
             if (StringUtils.isNotBlank(request.getInvitationCode())) {
                 User userByInvitationCode = userDao.findUserByInvitationCode(request.getInvitationCode());
-                if (userByInvitationCode !=null) {
+                if (userByInvitationCode != null) {
                     user.setInviterPeople(userByInvitationCode.getRealname() + "(" + userByInvitationCode.getId() + ")");
                 }
             }
@@ -45,11 +44,11 @@ public class UserServiceImple implements UserService {
             user.setRealname(request.getUsername());
             user.setNickname(request.getUsername());
             user.setRegistertime(date);
-//            user.setRole(UserConst.ROLE.NORMAL);
-//            user.setState(UserConst.STATE.NORMAL);
+            user.setRole(UserConst.ROLE.NORMAL);
+            user.setState(UserConst.STATE.NORMAL);
 
             int i = userDao.insertSelective(user);
-            if (i !=1) {
+            if (i != 1) {
                 throw new CodeException(ExceptionCode.EX_USER_REGISTER);
             }
             return Result.success(userDao.findUser(request));
@@ -58,19 +57,5 @@ public class UserServiceImple implements UserService {
         return Result.success(daoUser);
     }
 
-/*    @Override
-    public User findById(Integer id) {
-        User user = userDao.selectByPrimaryKey(id);
-        if (user == null) {
-            throw new CodeException(ExceptionCode.EX_NOT_UPDATE_USER_INFO_VERIFYING);
-        }
-        return user;
-    }
-
-    @Override
-    public Integer insert(User user) {
-        int i = userDao.insertSelective(user);
-        return i;
-    }*/
 
 }
