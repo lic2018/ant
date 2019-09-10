@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -35,16 +36,15 @@ public class UserController {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
-/*    @RequestMapping("findById")
-    public Result findById(@RequestParam("id") Integer id) {
-        User user = userService.findById(id);
-        return Result.success(user);
-    }
 
-    public String insert(@RequestBody User user) {
-        Integer integer = userService.insert(user);
-        return integer.toString();
-    }*/
+
+    @RequestMapping("test")
+    public Result test(HttpSession sess) {
+        sess.setAttribute("aa","123");
+        String id = sess.getId();
+        Object aa = sess.getAttribute("aa");
+        return Result.success(aa);
+    }
 
 
     // 获取验证码
@@ -66,6 +66,12 @@ public class UserController {
             throw new CodeException(ExceptionCode.EX_CODE_ERROR);
         }
         userService.login(loginRequest);
+        return Result.success();
+    }
+
+    // 首页数据
+    @RequestMapping("home")
+    public Result home(@RequestBody LoginRequest loginRequest) {
         return Result.success();
     }
 
