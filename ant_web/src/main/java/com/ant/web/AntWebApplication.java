@@ -1,4 +1,4 @@
-package com.ant.ant_web;
+package com.ant.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
