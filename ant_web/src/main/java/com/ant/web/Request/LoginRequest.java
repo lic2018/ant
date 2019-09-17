@@ -1,6 +1,6 @@
 package com.ant.web.Request;
 
-import com.ant.app.entity.User;
+import com.ant.web.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 

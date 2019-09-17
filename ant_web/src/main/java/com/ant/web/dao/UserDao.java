@@ -1,7 +1,7 @@
 package com.ant.web.dao;
 
-import com.ant.app.Request.LoginRequest;
-import com.ant.app.entity.User;
+import com.ant.web.Request.LoginRequest;
+import com.ant.web.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

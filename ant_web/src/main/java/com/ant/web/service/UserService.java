@@ -1,7 +1,7 @@
 package com.ant.web.service;
 
-import com.ant.app.Request.LoginRequest;
 import com.ant.bean.Result;
+import com.ant.web.Request.LoginRequest;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;

@@ -31,13 +31,11 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("user")
 public class UserController {
 
-    // lai
     @Autowired
     private UserService userService;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
-
 
     @RequestMapping("test")
     public Result test(HttpSession sess) {
@@ -46,7 +44,6 @@ public class UserController {
         Object aa = sess.getAttribute("aa");
         return Result.success(aa);
     }
-
 
     // 获取验证码
     @RequestMapping("securityCode")
@@ -75,5 +72,7 @@ public class UserController {
     public Result home(@RequestBody LoginRequest loginRequest) {
         return Result.success();
     }
+
+
 
 }

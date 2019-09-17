@@ -1,13 +1,13 @@
 package com.ant.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
-import com.ant.app.Request.LoginRequest;
-import com.ant.app.entity.User;
-import com.ant.app.service.UserService;
 import com.ant.bean.Result;
 import com.ant.constant.RedisConst;
 import com.ant.exception.CodeException;
 import com.ant.exception.ExceptionCode;
+import com.ant.web.Request.LoginRequest;
+import com.ant.web.entity.User;
+import com.ant.web.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
