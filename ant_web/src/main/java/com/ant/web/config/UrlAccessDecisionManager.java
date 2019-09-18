@@ -1,5 +1,7 @@
 package com.ant.web.config;
 
+import com.ant.exception.CodeException;
+import com.ant.exception.ExceptionCode;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -27,8 +29,10 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             String needRole = ca.getAttribute();
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (auth instanceof AnonymousAuthenticationToken) {
-                    throw new BadCredentialsException("未登录");
-                } else
+//                    throw new BadCredentialsException("未登录");
+                    throw new CodeException(ExceptionCode.EX_USER_NOT_LOGIN);
+
+                }
                     return;
             }
             //当前用户所具有的权限

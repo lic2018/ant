@@ -4,6 +4,8 @@ public enum ExceptionCode {
 
  // 注册失败
   EX_USER_REGISTER(900),
+ // 未登录
+ EX_USER_NOT_LOGIN(901),
 
   /** 用户不存在 */
   EX_USER_NOT_FOUND(10001),
