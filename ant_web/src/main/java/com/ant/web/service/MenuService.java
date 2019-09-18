@@ -2,17 +2,18 @@ package com.ant.web.service;
 
 import com.ant.bean.Result;
 import com.ant.web.Request.LoginRequest;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.ant.web.entity.Menu;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author: lic
  * @data: 2019/9/6
  */
 @Validated
-public interface UserService extends UserDetailsService {
+public interface MenuService {
 
-    Result login(@Valid LoginRequest user);
+    List<Menu> getAllMenu();
 }

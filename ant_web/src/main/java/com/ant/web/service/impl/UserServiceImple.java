@@ -1,15 +1,18 @@
 package com.ant.web.service.impl;
 
-import com.ant.app.Request.LoginRequest;
-import com.ant.app.dao.UserDao;
-import com.ant.app.entity.User;
-import com.ant.app.service.UserService;
 import com.ant.bean.Result;
 import com.ant.constant.UserConst;
 import com.ant.exception.CodeException;
 import com.ant.exception.ExceptionCode;
+import com.ant.web.Request.LoginRequest;
+import com.ant.web.dao.UserDao;
+import com.ant.web.entity.User;
+import com.ant.web.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -20,7 +23,7 @@ import java.util.Date;
  * @data: 2019/9/6
  */
 @Service
-public class UserServiceImple implements UserService {
+public class UserServiceImple implements UserService, UserDetailsService {
 
     @Autowired
     private UserDao userDao;
@@ -58,4 +61,14 @@ public class UserServiceImple implements UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUsername(username);
+        User user = userDao.findUser(loginRequest);
+        if (user == null ) {
+            throw new CodeException(ExceptionCode.EX_USER_REGISTER);
+        }
+        return user;
+    }
 }

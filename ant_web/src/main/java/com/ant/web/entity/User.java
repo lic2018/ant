@@ -1,13 +1,20 @@
 package com.ant.web.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * user
  * @author 
  */
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
     private Integer id;
 
     /**
@@ -85,6 +92,9 @@ public class User implements Serializable {
      */
     private String wechatCode;
 
+    private List<Role> roles;
+
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -97,6 +107,26 @@ public class User implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setUsername(String username) {
@@ -117,6 +147,15 @@ public class User implements Serializable {
 
     public void setRealname(String realname) {
         this.realname = realname;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
     }
 
     public String getPassword() {
@@ -213,5 +252,14 @@ public class User implements Serializable {
 
     public void setWechatCode(String wechatCode) {
         this.wechatCode = wechatCode;
+    }
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
