@@ -1,9 +1,11 @@
 package com.ant.web.dao;
 
-import com.ant.web.Request.LoginRequest;
+import com.ant.web.entity.Role;
 import com.ant.web.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * UserDao继承基类
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends MyBatisBaseDao<User, Integer> {
 
-    User findUser(LoginRequest user);
+//    UserResponse findUser(User user);
 
     User findUserByInvitationCode(@Param("invitationCode") String invitationCode);
+
+    List<Role> getRolesByHrId(Integer id);
 }

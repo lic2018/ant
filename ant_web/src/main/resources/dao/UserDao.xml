@@ -19,6 +19,9 @@
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="wechat_code" jdbcType="VARCHAR" property="wechatCode" />
   </resultMap>
+
+
+
   <sql id="Base_Column_List">
     id, username, nickname, realname, `password`, icon, sex, `state`, invitation_code, 
     inviter_people, birthday, registerTime, update_time, `role`, money, wechat_code
@@ -214,15 +217,13 @@
   </update>
 
 
-
-
-  <select id="findUser" resultMap="BaseResultMap" parameterType="com.ant.web.entity.User">
-    select * from user
-    where username = #{username}
-  </select>
-
   <select id="findUserByInvitationCode" resultType="com.ant.web.entity.User" resultMap="BaseResultMap" >
     select * from user
     where invitation_code = #{invitationCode}
   </select>
+
+  <select id="getRolesByHrId" resultType="com.ant.web.entity.Role">
+    SELECT r.* FROM user_role h,role r where h.rid=r.id AND h.hrid=#{id}
+  </select>
+
 </mapper>

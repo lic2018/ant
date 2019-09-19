@@ -2,6 +2,7 @@ package com.ant.web.service.impl;
 
 import com.ant.web.dao.MenuDao;
 import com.ant.web.entity.Menu;
+import com.ant.web.response.MenuResponse;
 import com.ant.web.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class MenuServiceImple implements MenuService {
     private MenuDao menuDao;
 
     @Override
-    public List<Menu> getAllMenu() {
-        return menuDao.findList();
+    public List<MenuResponse> getAllMenu() {
+        return menuDao.getAllMenu();
     }
 }

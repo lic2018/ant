@@ -1,11 +1,9 @@
 package com.ant.web.service;
 
-import com.ant.bean.Result;
-import com.ant.web.Request.LoginRequest;
 import com.ant.web.entity.Menu;
+import com.ant.web.response.MenuResponse;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -15,5 +13,5 @@ import java.util.List;
 @Validated
 public interface MenuService {
 
-    List<Menu> getAllMenu();
+    List<MenuResponse> getAllMenu();
 }
