@@ -18,4 +18,6 @@ public interface UserDao extends MyBatisBaseDao<User, Integer> {
     User findUserByInvitationCode(@Param("invitationCode") String invitationCode);
 
     List<Role> getRolesByHrId(Integer id);
+
+    List<User> getAll(@Param("user") User user);
 }

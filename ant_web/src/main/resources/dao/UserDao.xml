@@ -226,4 +226,9 @@
     SELECT r.* FROM user_role h,role r where h.rid=r.id AND h.hrid=#{id}
   </select>
 
+    <select id="getAll" resultType="com.ant.web.entity.User">
+      select * from USER
+
+    </select>
+
 </mapper>

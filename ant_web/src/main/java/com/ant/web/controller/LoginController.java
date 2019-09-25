@@ -18,15 +18,15 @@ public class LoginController {
     private UserService userService;
 
 
-    @RequestMapping("/login_p")
-    public Result loginP() {
-        return Result.failure(300, "尚未登录，请登录!");
-    }
-
-    @RequestMapping("/login")
-    public Result login(@RequestBody User user) {
-        Result result = userService.login(user);
-        return Result.success(result);
-    }
+//    @RequestMapping("/login_p")
+//    public Result loginP() {
+//        return Result.failure(300, "尚未登录，请登录!");
+//    }
+//
+//    @RequestMapping("/login")
+//    public Result login(@RequestBody User user) {
+//        Result result = userService.login(user);
+//        return Result.success(result);
+//    }
 
 }

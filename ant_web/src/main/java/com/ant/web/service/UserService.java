@@ -5,6 +5,7 @@ import com.ant.web.entity.User;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author: lic
@@ -14,4 +15,6 @@ import javax.validation.Valid;
 public interface UserService {
 
     Result login(User user);
+
+    Result getAll(User user);
 }

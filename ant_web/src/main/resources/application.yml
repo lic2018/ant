@@ -33,6 +33,13 @@ spring:
       max-file-size: 20MB
       max-request-size: 50MB
 
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled: false
+
 # 指定mybatis映射文件的地址
 mybatis:
   mapper-locations: classpath:dao/*.xml
@@ -40,3 +47,7 @@ mybatis:
     call-setters-on-nulls: true
     cache-enabled: false
     lazy-loading-enabled: false
+
+
+
+
