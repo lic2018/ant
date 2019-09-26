@@ -5,12 +5,13 @@
 	<parent>
 		<artifactId>ant_parent</artifactId>
 		<groupId>com.ant</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../ant_parent/pom.xml</relativePath>
 	</parent>
 
 	<groupId>com.ant</groupId>
 	<artifactId>ant_web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>ant_web</name>
 	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
@@ -23,7 +24,7 @@
 		<dependency>
 			<groupId>com.ant</groupId>
 			<artifactId>ant_common</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -32,6 +33,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<classifier>exec</classifier>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
