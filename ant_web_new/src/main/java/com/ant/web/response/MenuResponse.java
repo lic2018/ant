@@ -1,7 +1,5 @@
 package com.ant.web.response;
 
-import com.ant.web.entity.Menu;
-import com.ant.web.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
 

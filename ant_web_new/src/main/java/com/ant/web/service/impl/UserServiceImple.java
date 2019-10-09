@@ -1,13 +1,23 @@
 package com.ant.web.service.impl;
 
 import com.ant.web.bean.Result;
+import com.ant.web.constant.BaseConst;
+import com.ant.web.constant.UserConst;
+import com.ant.web.dao.UserApplicationDao;
 import com.ant.web.dao.UserDao;
 import com.ant.web.entity.User;
+import com.ant.web.entity.UserApplication;
+import com.ant.web.exception.CodeableException;
+import com.ant.web.exception.ExceptionCode;
+import com.ant.web.request.ApplicationForm;
+import com.ant.web.request.RegisterForm;
+import com.ant.web.response.UserResponse;
 import com.ant.web.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,24 +31,55 @@ public class UserServiceImple implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private UserApplicationDao userApplicationDao;
+
     @Override
-    public Result login(User user) {
-//        UserResponse daoUser = userDao.findUser(user);
-//        if (daoUser == null) {
-//            throw new CodeException(ExceptionCode.EX_USER_USERNAME);
-//        }
+    public Result registerList(RegisterForm form) {
+        PageHelper.startPage(form.getPageIndex(), form.getPageSize());
+
+        List<User> list = userDao.registerList(form);
+        PageInfo<User> pageInfo = new PageInfo<>(list);
+
+        return Result.success(pageInfo);
+    }
+
+    @Override
+    public Result registerChange(User user) {
+        int update = userDao.updateByPrimaryKeySelective(user);
+        if (update != 1) {
+            throw new CodeableException(ExceptionCode.EX_SQL);
+        }
         return Result.success();
     }
 
     @Override
-    public Result getAll(User user) {
+    public Result registerDetail(Integer id) {
+        UserResponse userResponse = userDao.registerDetail(id);
+        return Result.success(userResponse);
+    }
 
-        PageHelper.startPage(0,2);
-
-        List<User> users = userDao.getAll(user);
-
-        PageInfo<User> pageInfo = new PageInfo<>(users);
-
+    @Override
+    public Result applicationList(ApplicationForm form) {
+        PageHelper.startPage(form.getPageIndex(), form.getPageSize());
+        List<UserApplication> list = userApplicationDao.applicationList(form);
+        PageInfo<UserApplication> pageInfo = new PageInfo<>(list);
         return Result.success(pageInfo);
+
+    }
+
+    @Transactional
+    @Override
+    public Result applicationUpdate(Integer id, Integer userId) {
+        User user = new User();
+        user.setId(userId);
+        user.setRole(UserConst.ROLE.COLONEL);
+        userDao.updateByPrimaryKeySelective(user);
+
+        UserApplication userApplication = new UserApplication();
+        userApplication.setId(id);
+        userApplication.setState(BaseConst.STATE.DELETE);
+        userApplicationDao.updateByPrimaryKeySelective(userApplication);
+        return Result.success();
     }
 }
