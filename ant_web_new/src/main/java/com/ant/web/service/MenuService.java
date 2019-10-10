@@ -1,9 +1,6 @@
 package com.ant.web.service;
 
-import com.ant.web.response.MenuResponse;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.List;
 
 /**
  * @Author: lic
@@ -12,5 +9,5 @@ import java.util.List;
 @Validated
 public interface MenuService {
 
-    List<MenuResponse> getAllMenu();
+//    List<MenuResponse> getAllMenu();
 }

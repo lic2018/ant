@@ -1,11 +1,7 @@
 package com.ant.web.service.impl;
 
-import com.ant.web.response.MenuResponse;
 import com.ant.web.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @Author: lic
@@ -14,11 +10,11 @@ import java.util.List;
 @Service
 public class MenuServiceImple implements MenuService {
 
-    @Autowired
-    private MenuDao menuDao;
-
-    @Override
-    public List<MenuResponse> getAllMenu() {
-        return menuDao.getAllMenu();
-    }
+//    @Autowired
+//    private MenuDao menuDao;
+//
+//    @Override
+//    public List<MenuResponse> getAllMenu() {
+//        return menuDao.getAllMenu();
+//    }
 }
