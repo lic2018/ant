@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ant.app.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="com.ant.app.entity.Order">
+    <id column="code" jdbcType="VARCHAR" property="code" />
+    <result column="star" jdbcType="CHAR" property="star" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="payment" jdbcType="VARCHAR" property="payment" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="addressee" jdbcType="VARCHAR" property="addressee" />
+    <result column="addressee_tel" jdbcType="VARCHAR" property="addresseeTel" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="shipments_time" jdbcType="TIMESTAMP" property="shipmentsTime" />
+    <result column="receiving_time" jdbcType="TIMESTAMP" property="receivingTime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="express" jdbcType="VARCHAR" property="express" />
+    <result column="express_no" jdbcType="VARCHAR" property="expressNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code, star, money, payment, `state`, remark, address, addressee, addressee_tel, order_time, 
+    pay_time, shipments_time, receiving_time, `comment`, express, express_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order
+    where code = #{code,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="code" keyProperty="code" parameterType="com.ant.app.entity.Order" useGeneratedKeys="true">
+    insert into order (star, money, payment, 
+      `state`, remark, address, 
+      addressee, addressee_tel, order_time, 
+      pay_time, shipments_time, receiving_time, 
+      `comment`, express, express_no
+      )
+    values (#{star,jdbcType=CHAR}, #{money,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{addressee,jdbcType=VARCHAR}, #{addresseeTel,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{shipmentsTime,jdbcType=TIMESTAMP}, #{receivingTime,jdbcType=TIMESTAMP}, 
+      #{comment,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="code" keyProperty="code" parameterType="com.ant.app.entity.Order" useGeneratedKeys="true">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="star != null">
+        star,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="addressee != null">
+        addressee,
+      </if>
+      <if test="addresseeTel != null">
+        addressee_tel,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="shipmentsTime != null">
+        shipments_time,
+      </if>
+      <if test="receivingTime != null">
+        receiving_time,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="express != null">
+        express,
+      </if>
+      <if test="expressNo != null">
+        express_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="star != null">
+        #{star,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null">
+        #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="addresseeTel != null">
+        #{addresseeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentsTime != null">
+        #{shipmentsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingTime != null">
+        #{receivingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null">
+        #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null">
+        #{expressNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ant.app.entity.Order">
+    update order
+    <set>
+      <if test="star != null">
+        star = #{star,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null">
+        addressee = #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="addresseeTel != null">
+        addressee_tel = #{addresseeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentsTime != null">
+        shipments_time = #{shipmentsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingTime != null">
+        receiving_time = #{receivingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null">
+        express = #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null">
+        express_no = #{expressNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ant.app.entity.Order">
+    update order
+    set star = #{star,jdbcType=CHAR},
+      money = #{money,jdbcType=VARCHAR},
+      payment = #{payment,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      addressee = #{addressee,jdbcType=VARCHAR},
+      addressee_tel = #{addresseeTel,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      shipments_time = #{shipmentsTime,jdbcType=TIMESTAMP},
+      receiving_time = #{receivingTime,jdbcType=TIMESTAMP},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      express = #{express,jdbcType=VARCHAR},
+      express_no = #{expressNo,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+</mapper>
