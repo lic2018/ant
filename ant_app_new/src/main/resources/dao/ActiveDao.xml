@@ -155,4 +155,13 @@
       `state` = #{state,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findActiveByType" parameterType="String" resultMap="BaseResultMap">
+    select id, title, icon, jumpway, goods_id
+    from active
+    where type = #{type} and state = '0' order by sort desc
+  </select>
+
+
 </mapper>

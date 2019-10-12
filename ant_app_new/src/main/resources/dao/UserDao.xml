@@ -212,4 +212,20 @@
       wechat_code = #{wechatCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findUserByUsername" resultMap="BaseResultMap" parameterType="String">
+    select * from USER where username = #{username};
+  </select>
+
+  <select id="findInvitationByCode" resultType="String" parameterType="String">
+    SELECT concat(realname,'(',id,')')
+    from USER where invitation_code = #{invitationCode}
+  </select>
+
+  <select id="findInvitation" resultMap="BaseResultMap" parameterType="string">
+    SELECT u2.nickname, u2.username, u2.register_time
+    from user u1, user u2
+    where u1.id = #{userId} and u1.invitation_code = u2.inviter_id and u2.role = '1' and u2.state = '0'
+  </select>
+
 </mapper>

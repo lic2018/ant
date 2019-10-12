@@ -14,8 +14,12 @@ public enum ExceptionCode {
  EX_USER_NOT_LOGIN(901),
  EX_USER_USERNAME(902),
 
-  /** 用户不存在 */
-  EX_USER_NOT_FOUND(10001),
+
+
+  /** 验证码错误 */
+  EX_AUTHCODE_ERROE(10001),
+
+
 
   /** 手机号码所有者不合法 */
   EX_USER_MOBILE_OWNER_INVALID(10002),
