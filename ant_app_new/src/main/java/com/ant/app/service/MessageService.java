@@ -8,4 +8,6 @@ import com.ant.app.bean.Result;
  */
 public interface MessageService {
     Result list(int userId);
+
+    Result empty(int userId);
 }

@@ -18,4 +18,12 @@ public interface BaseConst {
         String DELETE = "1";
     }
 
+
+
+
+    /** 默认收货地址 */
+    interface ADDRESS_DEFAULT {
+        String ISDEFAULT = "0";
+        String NORMAL = "1";
+    }
 }
