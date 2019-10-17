@@ -7,8 +7,8 @@ import com.ant.app.entity.User;
 import com.ant.app.exception.CodeableException;
 import com.ant.app.exception.ExceptionCode;
 import com.ant.app.service.UserService;
-import com.sun.corba.se.spi.ior.IdentifiableFactory;
-import org.aspectj.apache.bcel.classfile.Code;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("user")
 public class UserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
@@ -34,38 +37,54 @@ public class UserController {
     /*
      * 获取验证码
      * @author lic
-     * @data 2019/10/12
-     * @param [tel, invitationCode]
+     * @data 2019/10/17
+     * @param [tel, session]
      * @return com.ant.app.bean.Result
      */
     @RequestMapping("getAuthCode")
     public Result getAuthCode(@RequestParam(value = "tel", required = true) String tel, HttpSession session) {
         int randomInt = RandomUtil.randomInt(6);
-        String a = randomInt + "";
         stringRedisTemplate.opsForValue().set(RedisEnum.AuthCode.getPrefix() + session.getId(), randomInt + "", RedisEnum.AuthCode.getTime(), TimeUnit.SECONDS);
         // 发送短信
-
+        LOGGER.info("AuthCode:" + randomInt);
         return Result.success();
     }
 
     /*
-     * 绑定
+     * 登录或绑定
      * @author lic
-     * @data 2019/10/12
-     * @param [invitationCode]
+     * @data 2019/10/17
+     * @param [tel, authCode, invitationCode, wechatCode, session]
      * @return com.ant.app.bean.Result
      */
-    @RequestMapping("binding")
-    public Result binding(@RequestParam(value = "tel", required = true) String tel,@RequestParam(value = "authCode", required = true) String authCode,
-                          @RequestParam(value = "invitationCode") String invitationCode,HttpSession session) {
+    @RequestMapping("loginOrbinding")
+    public Result loginOrbinding(@RequestParam(value = "tel", required = true) String tel, @RequestParam(value = "authCode", required = true) String authCode,
+                                 @RequestParam(value = "invitationCode") String invitationCode, @RequestParam(value = "wechatCode") String wechatCode, HttpSession session) {
 
         String sessionAuthCode = stringRedisTemplate.opsForValue().get(RedisEnum.AuthCode.getPrefix() + session.getId());
+        if (sessionAuthCode == null) {
+            throw new CodeableException(ExceptionCode.EX_AUTHCODE_OVERDUE_ERROE);
+        }
         if (!authCode.equals(sessionAuthCode)) {
             throw new CodeableException(ExceptionCode.EX_AUTHCODE_ERROE);
         }
-        return userService.binding(tel, invitationCode);
+
+        User user = userService.loginOrbinding(tel, invitationCode, wechatCode);
+        session.setAttribute("userId", user.getId());
+        return Result.success(user);
     }
 
+    /*
+     * 用户协议
+     * @author lic
+     * @data 2019/10/17
+     * @param []
+     * @return com.ant.app.bean.Result
+     */
+    @RequestMapping("userAgreement")
+    public Result userAgreement() {
+        return userService.userAgreement();
+    }
 
 
 }

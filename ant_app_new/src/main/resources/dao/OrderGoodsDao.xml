@@ -7,9 +7,11 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="main_image" jdbcType="VARCHAR" property="mainImage" />
+    <result column="parameter" jdbcType="VARCHAR" property="parameter" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, code, `name`, `number`, price
+    id, code, `name`, `number`, price, main_image, `parameter`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +25,11 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.OrderGoods" useGeneratedKeys="true">
     insert into order_goods (code, `name`, `number`, 
-      price)
+      price, main_image, `parameter`
+      )
     values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL})
+      #{price,jdbcType=DECIMAL}, #{mainImage,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.OrderGoods" useGeneratedKeys="true">
     insert into order_goods
@@ -42,6 +46,12 @@
       <if test="price != null">
         price,
       </if>
+      <if test="mainImage != null">
+        main_image,
+      </if>
+      <if test="parameter != null">
+        `parameter`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="code != null">
@@ -55,6 +65,12 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="mainImage != null">
+        #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        #{parameter,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -73,88 +89,11 @@
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ant.app.entity.OrderGoods">
-    update order_goods
-    set code = #{code,jdbcType=VARCHAR},
-      `name` = #{name,jdbcType=VARCHAR},
-      `number` = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ant.app.entity.OrderGoods">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="number" jdbcType="INTEGER" property="number" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, code, `name`, `number`, price
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from order_goods
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order_goods
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.OrderGoods" useGeneratedKeys="true">
-    insert into order_goods (code, `name`, `number`, 
-      price)
-    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.OrderGoods" useGeneratedKeys="true">
-    insert into order_goods
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="code != null">
-        code,
+      <if test="mainImage != null">
+        main_image = #{mainImage,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="number != null">
-        `number`,
-      </if>
-      <if test="price != null">
-        price,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=INTEGER},
-      </if>
-      <if test="price != null">
-        #{price,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ant.app.entity.OrderGoods">
-    update order_goods
-    <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null">
-        `number` = #{number,jdbcType=INTEGER},
-      </if>
-      <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+      <if test="parameter != null">
+        `parameter` = #{parameter,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -164,7 +103,9 @@
     set code = #{code,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
       `number` = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL}
+      price = #{price,jdbcType=DECIMAL},
+      main_image = #{mainImage,jdbcType=VARCHAR},
+      `parameter` = #{parameter,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

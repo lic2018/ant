@@ -51,9 +51,14 @@ public class User implements Serializable {
     private String invitationCode;
 
     /**
-     * 邀请人 名字(ID:XX)
+     * 邀请人名字
      */
-    private String inviterPeople;
+    private String inviterName;
+
+    /**
+     * 邀请人id
+     */
+    private Integer inviterId;
 
     /**
      * 出生日期
@@ -159,12 +164,20 @@ public class User implements Serializable {
         this.invitationCode = invitationCode;
     }
 
-    public String getInviterPeople() {
-        return inviterPeople;
+    public String getInviterName() {
+        return inviterName;
     }
 
-    public void setInviterPeople(String inviterPeople) {
-        this.inviterPeople = inviterPeople;
+    public void setInviterName(String inviterName) {
+        this.inviterName = inviterName;
+    }
+
+    public Integer getInviterId() {
+        return inviterId;
+    }
+
+    public void setInviterId(Integer inviterId) {
+        this.inviterId = inviterId;
     }
 
     public Date getBirthday() {

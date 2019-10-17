@@ -18,6 +18,8 @@ public enum ExceptionCode {
 
   /** 验证码错误 */
   EX_AUTHCODE_ERROE(10001),
+ /** 验证码过期 */
+ EX_AUTHCODE_OVERDUE_ERROE(10002),
 
 
 

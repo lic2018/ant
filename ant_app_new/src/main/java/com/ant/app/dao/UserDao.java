@@ -13,7 +13,10 @@ import java.util.List;
 public interface UserDao extends MyBatisBaseDao<User, Integer> {
     User findUserByUsername(@Param("username") String tel);
 
-    String findInvitationByCode(String invitationCode);
+    User findInvitationByCode(String invitationCode);
 
     List<User> findInvitation(int userId);
+
+    int updateWechatCodeByTel(@Param("username") String username, @Param("wechatCode") String wechatCode);
+
 }

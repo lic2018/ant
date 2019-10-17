@@ -60,4 +60,10 @@
       `value` = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findByName" parameterType="string" resultMap="BaseResultMap">
+    SELECT * from app_configure where name = #{name}
+  </select>
+
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.ant.app.dao;
 
 import com.ant.app.entity.AppConfigure;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AppConfigureDao extends MyBatisBaseDao<AppConfigure, Integer> {
+    AppConfigure findByName(@Param("name") String name);
 }

@@ -11,7 +11,8 @@
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="state" jdbcType="CHAR" property="state" />
     <result column="invitation_code" jdbcType="VARCHAR" property="invitationCode" />
-    <result column="inviter_people" jdbcType="VARCHAR" property="inviterPeople" />
+    <result column="inviter_name" jdbcType="VARCHAR" property="inviterName" />
+    <result column="inviter_id" jdbcType="INTEGER" property="inviterId" />
     <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, username, nickname, realname, `password`, icon, sex, `state`, invitation_code, 
-    inviter_people, birthday, register_time, update_time, `role`, money, wechat_code
+    inviter_name, inviter_id, birthday, register_time, update_time, `role`, money, wechat_code
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,14 +37,16 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.User" useGeneratedKeys="true">
     insert into user (username, nickname, realname, 
       `password`, icon, sex, `state`, 
-      invitation_code, inviter_people, birthday, 
-      register_time, update_time, `role`, 
-      money, wechat_code)
+      invitation_code, inviter_name, inviter_id, 
+      birthday, register_time, update_time, 
+      `role`, money, wechat_code
+      )
     values (#{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{state,jdbcType=CHAR}, 
-      #{invitationCode,jdbcType=VARCHAR}, #{inviterPeople,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{registerTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{role,jdbcType=CHAR}, 
-      #{money,jdbcType=DECIMAL}, #{wechatCode,jdbcType=VARCHAR})
+      #{invitationCode,jdbcType=VARCHAR}, #{inviterName,jdbcType=VARCHAR}, #{inviterId,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{registerTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{role,jdbcType=CHAR}, #{money,jdbcType=DECIMAL}, #{wechatCode,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.User" useGeneratedKeys="true">
     insert into user
@@ -72,8 +75,11 @@
       <if test="invitationCode != null">
         invitation_code,
       </if>
-      <if test="inviterPeople != null">
-        inviter_people,
+      <if test="inviterName != null">
+        inviter_name,
+      </if>
+      <if test="inviterId != null">
+        inviter_id,
       </if>
       <if test="birthday != null">
         birthday,
@@ -119,8 +125,11 @@
       <if test="invitationCode != null">
         #{invitationCode,jdbcType=VARCHAR},
       </if>
-      <if test="inviterPeople != null">
-        #{inviterPeople,jdbcType=VARCHAR},
+      <if test="inviterName != null">
+        #{inviterName,jdbcType=VARCHAR},
+      </if>
+      <if test="inviterId != null">
+        #{inviterId,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=TIMESTAMP},
@@ -169,8 +178,11 @@
       <if test="invitationCode != null">
         invitation_code = #{invitationCode,jdbcType=VARCHAR},
       </if>
-      <if test="inviterPeople != null">
-        inviter_people = #{inviterPeople,jdbcType=VARCHAR},
+      <if test="inviterName != null">
+        inviter_name = #{inviterName,jdbcType=VARCHAR},
+      </if>
+      <if test="inviterId != null">
+        inviter_id = #{inviterId,jdbcType=INTEGER},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=TIMESTAMP},
@@ -203,7 +215,8 @@
       sex = #{sex,jdbcType=CHAR},
       `state` = #{state,jdbcType=CHAR},
       invitation_code = #{invitationCode,jdbcType=VARCHAR},
-      inviter_people = #{inviterPeople,jdbcType=VARCHAR},
+      inviter_name = #{inviterName,jdbcType=VARCHAR},
+      inviter_id = #{inviterId,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=TIMESTAMP},
       register_time = #{registerTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -213,8 +226,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
   <select id="findUserByUsername" resultMap="BaseResultMap" parameterType="String">
-    select * from USER where username = #{username};
+    select id,realname from USER where username = #{username};
   </select>
 
   <select id="findInvitationByCode" resultType="String" parameterType="String">
@@ -227,5 +241,10 @@
     from user u1, user u2
     where u1.id = #{userId} and u1.invitation_code = u2.inviter_id and u2.role = '1' and u2.state = '0'
   </select>
+
+  <update id="updateWechatCodeByTel" parameterType="string">
+    update USER set wechat_code = #{wechatCode} where username = #{username}
+  </update>
+
 
 </mapper>

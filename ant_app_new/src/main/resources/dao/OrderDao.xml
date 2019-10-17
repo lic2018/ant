@@ -3,6 +3,7 @@
 <mapper namespace="com.ant.app.dao.OrderDao">
   <resultMap id="BaseResultMap" type="com.ant.app.entity.Order">
     <id column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="star" jdbcType="CHAR" property="star" />
     <result column="money" jdbcType="VARCHAR" property="money" />
     <result column="payment" jdbcType="VARCHAR" property="payment" />
@@ -19,9 +20,20 @@
     <result column="express" jdbcType="VARCHAR" property="express" />
     <result column="express_no" jdbcType="VARCHAR" property="expressNo" />
   </resultMap>
+
+
+  <resultMap id="OrderResultMap" type="com.ant.app.response.OrderResponse">
+    <id column="code" jdbcType="VARCHAR" property="code" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <collection property="goodsList" ofType="com.ant.app.entity.Goods" column="{code = code}"
+                select="findGoodsList" />
+
+  </resultMap>
+
   <sql id="Base_Column_List">
-    code, star, money, payment, `state`, remark, address, addressee, addressee_tel, order_time, 
-    pay_time, shipments_time, receiving_time, `comment`, express, express_no
+    code, user_id, star, money, payment, `state`, remark, address, addressee, addressee_tel, 
+    order_time, pay_time, shipments_time, receiving_time, `comment`, express, express_no
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -34,22 +46,25 @@
     where code = #{code,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="code" keyProperty="code" parameterType="com.ant.app.entity.Order" useGeneratedKeys="true">
-    insert into order (star, money, payment, 
-      `state`, remark, address, 
-      addressee, addressee_tel, order_time, 
-      pay_time, shipments_time, receiving_time, 
-      `comment`, express, express_no
-      )
-    values (#{star,jdbcType=CHAR}, #{money,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{addressee,jdbcType=VARCHAR}, #{addresseeTel,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{shipmentsTime,jdbcType=TIMESTAMP}, #{receivingTime,jdbcType=TIMESTAMP}, 
-      #{comment,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}
-      )
+    insert into order (user_id, star, money, 
+      payment, `state`, remark, 
+      address, addressee, addressee_tel, 
+      order_time, pay_time, shipments_time, 
+      receiving_time, `comment`, express, 
+      express_no)
+    values (#{userId,jdbcType=INTEGER}, #{star,jdbcType=CHAR}, #{money,jdbcType=VARCHAR}, 
+      #{payment,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{addressee,jdbcType=VARCHAR}, #{addresseeTel,jdbcType=VARCHAR}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{shipmentsTime,jdbcType=TIMESTAMP}, 
+      #{receivingTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR}, 
+      #{expressNo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="code" keyProperty="code" parameterType="com.ant.app.entity.Order" useGeneratedKeys="true">
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
       <if test="star != null">
         star,
       </if>
@@ -97,6 +112,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="star != null">
         #{star,jdbcType=CHAR},
       </if>
@@ -147,6 +165,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ant.app.entity.Order">
     update order
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="star != null">
         star = #{star,jdbcType=CHAR},
       </if>
@@ -197,7 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ant.app.entity.Order">
     update order
-    set star = #{star,jdbcType=CHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
+      star = #{star,jdbcType=CHAR},
       money = #{money,jdbcType=VARCHAR},
       payment = #{payment,jdbcType=VARCHAR},
       `state` = #{state,jdbcType=VARCHAR},
@@ -214,4 +236,17 @@
       express_no = #{expressNo,jdbcType=VARCHAR}
     where code = #{code,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="list" parameterType="string" resultMap="OrderResultMap">
+    SELECT code,money, state
+    from ORDER
+    where user_id = #{userId} order by order_time desc
+  </select>
+
+  <select id="findGoodsList" parameterType="string" resultMap="map">
+    select name, main_image mainImage, parameter
+    from order_goods where code = #{code}
+  </select>
+
 </mapper>

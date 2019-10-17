@@ -11,5 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public interface UserService {
 
-    Result binding(String tel ,String invitationCode);
+    User loginOrbinding(String tel, String invitationCode, String wechatCode);
+
+    Result userAgreement();
 }

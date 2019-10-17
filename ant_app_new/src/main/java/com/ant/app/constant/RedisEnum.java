@@ -6,7 +6,7 @@ package com.ant.app.constant;
  */
 public enum RedisEnum {
 
-    AuthCode ( "AuthCode_", 5 * 60L),
+    AuthCode ( "AuthCode_", 3 * 60L),
     AppUser ( "APP_USER_", 7 * 24 *60 * 60L),
 
     ;

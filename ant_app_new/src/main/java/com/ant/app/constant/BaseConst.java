@@ -26,4 +26,9 @@ public interface BaseConst {
         String ISDEFAULT = "0";
         String NORMAL = "1";
     }
+
+    /** app配置 */
+    interface APP_CONFIG {
+        String USER_AGREEMENT = "user_agreement";
+    }
 }

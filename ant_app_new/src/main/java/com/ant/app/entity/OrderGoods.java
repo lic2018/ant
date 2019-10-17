@@ -10,13 +10,35 @@ import java.math.BigDecimal;
 public class OrderGoods implements Serializable {
     private Integer id;
 
+    /**
+     * 订单编号
+     */
     private String code;
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * 数量
+     */
     private Integer number;
 
+    /**
+     * 价格
+     */
     private BigDecimal price;
+
+    /**
+     * 主图
+     */
+    private String mainImage;
+
+    /**
+     * 参数
+     */
+    private String parameter;
 
     private static final long serialVersionUID = 1L;
 
@@ -58,5 +80,21 @@ public class OrderGoods implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public String getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 }
