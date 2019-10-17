@@ -13,10 +13,11 @@
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="CHAR" property="state" />
+    <result column="visit_num" jdbcType="INTEGER" property="visitNum" />
   </resultMap>
   <sql id="Base_Column_List">
     id, `type`, title, icon, sort, jumpway, goods_id, begin_date, end_date, create_time, 
-    `state`
+    `state`, visit_num
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -32,11 +33,11 @@
     insert into active (`type`, title, icon, 
       sort, jumpway, goods_id, 
       begin_date, end_date, create_time, 
-      `state`)
+      `state`, visit_num)
     values (#{type,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
       #{sort,jdbcType=INTEGER}, #{jumpway,jdbcType=CHAR}, #{goodsId,jdbcType=VARCHAR}, 
       #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=CHAR})
+      #{state,jdbcType=CHAR}, #{visitNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ant.app.entity.Active" useGeneratedKeys="true">
     insert into active
@@ -71,6 +72,9 @@
       <if test="state != null">
         `state`,
       </if>
+      <if test="visitNum != null">
+        visit_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="type != null">
@@ -102,6 +106,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=CHAR},
+      </if>
+      <if test="visitNum != null">
+        #{visitNum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -138,6 +145,9 @@
       <if test="state != null">
         `state` = #{state,jdbcType=CHAR},
       </if>
+      <if test="visitNum != null">
+        visit_num = #{visitNum,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -152,16 +162,14 @@
       begin_date = #{beginDate,jdbcType=TIMESTAMP},
       end_date = #{endDate,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      `state` = #{state,jdbcType=CHAR}
+      `state` = #{state,jdbcType=CHAR},
+      visit_num = #{visitNum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-
   <select id="findActiveByType" parameterType="String" resultMap="BaseResultMap">
-    select id, title, icon, jumpway, goods_id
+    select id, title, icon, jumpway, goods_id, visit_num
     from active
     where type = #{type} and state = '0' order by sort desc
   </select>
-
-
 </mapper>

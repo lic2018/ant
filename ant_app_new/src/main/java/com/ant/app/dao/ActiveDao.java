@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface ActiveDao extends MyBatisBaseDao<Active, Integer> {
     List<Active> findActiveByType(@Param("type") String type);
+
 }

@@ -60,6 +60,11 @@ public class Active implements Serializable {
      */
     private String state;
 
+    /**
+     * 访问数
+     */
+    private Integer visitNum;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -148,5 +153,13 @@ public class Active implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getVisitNum() {
+        return visitNum;
+    }
+
+    public void setVisitNum(Integer visitNum) {
+        this.visitNum = visitNum;
     }
 }
