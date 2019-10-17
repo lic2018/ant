@@ -3,7 +3,6 @@ package com.ant.web.controller;
 import com.ant.bean.Result;
 import com.ant.web.entity.User;
 import com.ant.web.service.UserService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @Author: lic
@@ -29,10 +27,11 @@ public class UserController {
 
     @RequestMapping("test")
     public Result test(HttpSession sess) {
-        sess.setAttribute("aa", "123");
-        String id = sess.getId();
-        Object aa = sess.getAttribute("aa");
-        return Result.success(aa);
+//        sess.setAttribute("aa", "123");
+//        String id = sess.getId();
+//        Object aa = sess.getAttribute("aa");
+//        return Result.success(aa);
+        throw new RuntimeException();
     }
 
 

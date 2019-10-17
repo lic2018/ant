@@ -27,7 +27,7 @@ public class UserServiceImple implements UserService {
     public Result login(User user) {
 //        UserResponse daoUser = userDao.findUser(user);
 //        if (daoUser == null) {
-//            throw new CodeException(ExceptionCode.EX_USER_USERNAME);
+            throw new CodeException(ExceptionCode.EX_USER_USERNAME);
 //        }
         return Result.success();
     }
