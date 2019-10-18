@@ -17,4 +17,6 @@ public interface UserDao extends MyBatisBaseDao<User, Integer> {
     List<User> registerList(@Param("form") RegisterForm form);
 
     UserResponse registerDetail(@Param("id") Integer id);
+
+    User findByUsername(String username);
 }

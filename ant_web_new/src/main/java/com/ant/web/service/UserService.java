@@ -12,6 +12,10 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public interface UserService {
+    Result login(String username, String password);
+
+
+
 
     Result registerList(RegisterForm form);
 
@@ -22,4 +26,5 @@ public interface UserService {
     Result applicationList(ApplicationForm form);
 
     Result applicationUpdate(Integer id, Integer userId);
+
 }

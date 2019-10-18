@@ -18,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.security.provider.MD5;
 
 import java.util.List;
 
@@ -33,6 +34,16 @@ public class UserServiceImple implements UserService {
 
     @Autowired
     private UserApplicationDao userApplicationDao;
+
+    @Override
+    public Result login(String username, String password) {
+        User user = userDao.findByUsername(username);
+
+        if (password.equals(user.getPassword())) {
+
+        }
+        return null;
+    }
 
     @Override
     public Result registerList(RegisterForm form) {
@@ -82,4 +93,6 @@ public class UserServiceImple implements UserService {
         userApplicationDao.updateByPrimaryKeySelective(userApplication);
         return Result.success();
     }
+
+
 }

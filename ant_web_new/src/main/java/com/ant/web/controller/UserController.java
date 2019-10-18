@@ -7,10 +7,7 @@ import com.ant.web.request.RegisterForm;
 import com.ant.web.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户管理
@@ -23,6 +20,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping("login")
+    public Result login(@RequestParam(value = "username", required = true) String username, @RequestParam(value = "password",required = true) String password) {
+        return userService.login(username, password);
+    }
+
+
 
     @RequestMapping("registerList")
     public Result registerList(@RequestBody RegisterForm form) {
