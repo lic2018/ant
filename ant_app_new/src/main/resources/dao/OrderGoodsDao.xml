@@ -108,4 +108,14 @@
       `parameter` = #{parameter,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertBatch" parameterType="list">
+    insert into order_goods (code, name, NUMBER ,price, main_image, parameter) values (
+    <foreach collection="items" separator=",">
+      #{items.code}, #{items.name}, #{items.NUMBER}, #{items.price}, #{items.main_image}, #{items.parameter}
+    </foreach>
+    )
+  </insert>
+
+
 </mapper>

@@ -19,25 +19,25 @@ public class MessageController {
     private MessageService messageService;
 
 
-    /*
-     * 消息列表
+    /**
+     * @des 消息列表
      * @author lic
-     * @data 2019/10/16
-     * @param [userId]
+     * @data 2019/10/18
+     * @param userId
      * @return com.ant.app.bean.Result
-     */
+     **/
     @RequestMapping("list")
     public Result list(@SessionAttribute int userId) {
         return messageService.list(userId);
     }
 
-    /*
-     * 清空消息列表
+    /**
+     * @des 清空消息列表
      * @author lic
-     * @data 2019/10/16
-     * @param [userId]
+     * @data 2019/10/18
+     * @param userId
      * @return com.ant.app.bean.Result
-     */
+     **/
     @RequestMapping("empty")
     public Result empty(@SessionAttribute int userId) {
         return messageService.empty(userId);

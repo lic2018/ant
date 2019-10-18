@@ -38,5 +38,10 @@ public class MessageServiceImpl implements MessageService {
         return Result.success();
     }
 
+    @Override
+    public void insertNew(int userId) {
+        messageDao.insertNew(userId);
+    }
+
 
 }

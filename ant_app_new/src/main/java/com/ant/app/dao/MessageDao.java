@@ -15,4 +15,6 @@ public interface MessageDao extends MyBatisBaseDao<Message, Integer> {
     List<Message> list(@Param("userId") int userId);
 
     int empty(int userId);
+
+    int insertNew(int userId);
 }

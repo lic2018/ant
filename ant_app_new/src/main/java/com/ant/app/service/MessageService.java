@@ -10,4 +10,6 @@ public interface MessageService {
     Result list(int userId);
 
     Result empty(int userId);
+
+    void insertNew(int userId);
 }

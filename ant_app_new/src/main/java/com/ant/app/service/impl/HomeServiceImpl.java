@@ -28,6 +28,7 @@ public class HomeServiceImpl implements HomeService {
         map.put("icon", activeDao.findActiveByType("2"));
         map.put("activities", activeDao.findActiveByType("3"));
 
+
         return Result.success(map);
     }
 }

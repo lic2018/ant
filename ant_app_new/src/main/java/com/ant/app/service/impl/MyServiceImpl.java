@@ -37,7 +37,7 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public Result addressList(int userId) {
-        UserAddress list = userAddressDao.list(userId);
+        List<UserAddress> list = userAddressDao.list(userId);
         return Result.success(list);
     }
 

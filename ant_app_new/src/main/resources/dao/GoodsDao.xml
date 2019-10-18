@@ -261,4 +261,10 @@
       datail = #{datail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findById" parameterType="int" resultMap="BaseResultMap">
+    SELECT * from goods where id = #{goodsId}
+  </select>
+
+
 </mapper>

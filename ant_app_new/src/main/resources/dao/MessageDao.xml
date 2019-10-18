@@ -147,12 +147,18 @@
 
   <select id="list" parameterType="int" resultMap="BaseResultMap">
     select *
-    from message where user_id = #{userId}
+    from message where user_id = #{userId} and state = '0' order by create_time desc
   </select>
 
   <update id="empty" parameterType="int" >
     UPDATE message set state = '1' where user_id = #{userId}
   </update>
 
+  <insert id="insertNew" parameterType="int">
+    insert into message m (m.main_title, m.sub_title, m.type, m.user_id, m.create_time)
+    select p.main_title, p.sub_title, '1', #{userId}, now() from push p,message m2 where
+    m2.userId = #{userId} and m2.id != p.id and
+    p.state = '0'
+  </insert>
 
 </mapper>

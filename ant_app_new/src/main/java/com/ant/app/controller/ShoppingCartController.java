@@ -23,37 +23,38 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-    /*
-     * 列表
+    /**
+     * @des 列表
      * @author lic
-     * @data 2019/10/16
-     * @param [userId]
+     * @data 2019/10/18
+     * @param userId
      * @return com.ant.app.bean.Result
-     */
+     **/
     @RequestMapping("list")
     public Result list(@SessionAttribute int userId) {
         return shoppingCartService.list(userId);
     }
 
-    /*
-     * 加入购物车
+    /**
+     * @des 加入购物车
      * @author lic
-     * @data 2019/10/16
-     * @param [shoppingCart]
+     * @data 2019/10/18
+     * @param shoppingCart
      * @return com.ant.app.bean.Result
-     */
+     **/
     @RequestMapping("add")
     public Result add(@RequestBody ShoppingCart shoppingCart) {
         return shoppingCartService.add(shoppingCart);
     }
 
-    /*
-     * 商品移除购物车
+    /**
+     * @des 商品移除购物车
      * @author lic
-     * @data 2019/10/16
-     * @param [userId, ids]
+     * @data 2019/10/18
+     * @param userId
+     * @param ids
      * @return com.ant.app.bean.Result
-     */
+     **/
     @RequestMapping("delete")
     public Result delete(@SessionAttribute int userId, @Param("ids") String ids) {
         return shoppingCartService.delete(userId, ids);

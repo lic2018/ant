@@ -5,9 +5,13 @@ import com.ant.app.bean.Result;
 import com.ant.app.constant.BaseConst;
 import com.ant.app.constant.UserConst;
 import com.ant.app.dao.AppConfigureDao;
+import com.ant.app.dao.UserApplicationDao;
 import com.ant.app.dao.UserDao;
 import com.ant.app.entity.AppConfigure;
 import com.ant.app.entity.User;
+import com.ant.app.entity.UserApplication;
+import com.ant.app.exception.CodeableException;
+import com.ant.app.exception.ExceptionCode;
 import com.ant.app.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,8 @@ public class UserServiceImple implements UserService {
     private UserDao userDao;
     @Autowired
     private AppConfigureDao appConfigureDao;
+    @Autowired
+    private UserApplicationDao userApplicationDao;
 
     @Override
     public User loginOrbinding(String tel, String invitationCode, String wechatCode) {
@@ -60,5 +66,16 @@ public class UserServiceImple implements UserService {
         AppConfigure appConfigure = appConfigureDao.findByName(BaseConst.APP_CONFIG.USER_AGREEMENT);
         return Result.success(appConfigure);
     }
+
+    @Override
+    public Result applyForColonel(UserApplication userApplication) {
+        userApplication.setCreateTime(new Date());
+        int insert = userApplicationDao.insert(userApplication);
+        if (insert != 1) {
+            throw new CodeableException(ExceptionCode.EX_SQL);
+        }
+        return Result.success();
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.ant.app.service;
 
 import com.ant.app.bean.Result;
 import com.ant.app.entity.User;
+import com.ant.app.entity.UserApplication;
 import org.springframework.validation.annotation.Validated;
 
 /**
@@ -14,4 +15,7 @@ public interface UserService {
     User loginOrbinding(String tel, String invitationCode, String wechatCode);
 
     Result userAgreement();
+
+
+    Result applyForColonel(UserApplication userApplication);
 }
