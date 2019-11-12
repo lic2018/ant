@@ -10,13 +10,35 @@ import java.math.BigDecimal;
 public class OrderGoods implements Serializable {
     private Integer id;
 
+    /**
+     * 订单编号
+     */
     private String code;
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * 数量
+     */
     private Integer number;
 
+    /**
+     * 价格
+     */
     private BigDecimal price;
+
+    /**
+     * 主图
+     */
+    private String mainImage;
+
+    /**
+     * 参数
+     */
+    private String parameter;
 
     private static final long serialVersionUID = 1L;
 
@@ -60,50 +82,19 @@ public class OrderGoods implements Serializable {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        OrderGoods other = (OrderGoods) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
-            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()));
+    public String getMainImage() {
+        return mainImage;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getNumber() == null) ? 0 : getNumber().hashCode());
-        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
-        return result;
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
-        sb.append(", number=").append(number);
-        sb.append(", price=").append(price);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public String getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 }

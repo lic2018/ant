@@ -13,4 +13,5 @@ import java.util.List;
 @Repository
 public interface OrderDao extends MyBatisBaseDao<Order, String> {
     List<OrderResponse> list(OrderForm form);
+
 }

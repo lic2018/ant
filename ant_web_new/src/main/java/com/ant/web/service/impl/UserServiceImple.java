@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.security.provider.MD5;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,13 +37,17 @@ public class UserServiceImple implements UserService {
     private UserApplicationDao userApplicationDao;
 
     @Override
-    public Result login(String username, String password) {
-        User user = userDao.findByUsername(username);
-
-        if (password.equals(user.getPassword())) {
-
+    public UserResponse login(String username, String password) {
+        UserResponse user = userDao.findByUsername(username);
+        if (user == null ) {
+            throw new CodeableException(ExceptionCode.EX_USER_NOT_FOUND);
         }
-        return null;
+        // 密码没有加密
+        if (!password.equals(user.getPassword())) {
+            throw new CodeableException(ExceptionCode.EX_USER_USERNAME_PASSWORD);
+        }
+        user.setPassword(null);
+        return user;
     }
 
     @Override

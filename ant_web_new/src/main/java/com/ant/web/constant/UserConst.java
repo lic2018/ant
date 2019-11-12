@@ -7,10 +7,10 @@ package com.ant.web.constant;
 public interface UserConst {
 
     interface ROLE {
-        String NORMAL = "0";
         String COLONEL = "1";
         String ADMIN_MANAGER = "2";
         String NORMAL_MANAGER = "3";
+        String NORMAL = "4";
     }
 
     interface SEX {

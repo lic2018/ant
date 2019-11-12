@@ -51,9 +51,14 @@ public class User implements Serializable {
     private String invitationCode;
 
     /**
-     * 邀请人 名字(ID:XX)
+     * 邀请人名字
      */
-    private String inviterPeople;
+    private String inviterName;
+
+    /**
+     * 邀请人id
+     */
+    private Integer inviterId;
 
     /**
      * 出生日期
@@ -71,7 +76,7 @@ public class User implements Serializable {
     private Date updateTime;
 
     /**
-     * 角色（0无 1团长 2 超级管理员 3 管理子账户)
+     * 角色（1团长 2 超级管理员 3 管理子账户 4 普通)
      */
     private String role;
 
@@ -159,12 +164,20 @@ public class User implements Serializable {
         this.invitationCode = invitationCode;
     }
 
-    public String getInviterPeople() {
-        return inviterPeople;
+    public String getInviterName() {
+        return inviterName;
     }
 
-    public void setInviterPeople(String inviterPeople) {
-        this.inviterPeople = inviterPeople;
+    public void setInviterName(String inviterName) {
+        this.inviterName = inviterName;
+    }
+
+    public Integer getInviterId() {
+        return inviterId;
+    }
+
+    public void setInviterId(Integer inviterId) {
+        this.inviterId = inviterId;
     }
 
     public Date getBirthday() {
@@ -213,85 +226,5 @@ public class User implements Serializable {
 
     public void setWechatCode(String wechatCode) {
         this.wechatCode = wechatCode;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        User other = (User) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
-            && (this.getRealname() == null ? other.getRealname() == null : this.getRealname().equals(other.getRealname()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
-            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getInvitationCode() == null ? other.getInvitationCode() == null : this.getInvitationCode().equals(other.getInvitationCode()))
-            && (this.getInviterPeople() == null ? other.getInviterPeople() == null : this.getInviterPeople().equals(other.getInviterPeople()))
-            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()))
-            && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getWechatCode() == null ? other.getWechatCode() == null : this.getWechatCode().equals(other.getWechatCode()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
-        result = prime * result + ((getRealname() == null) ? 0 : getRealname().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
-        result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getInvitationCode() == null) ? 0 : getInvitationCode().hashCode());
-        result = prime * result + ((getInviterPeople() == null) ? 0 : getInviterPeople().hashCode());
-        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
-        result = prime * result + ((getRegisterTime() == null) ? 0 : getRegisterTime().hashCode());
-        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
-        result = prime * result + ((getRole() == null) ? 0 : getRole().hashCode());
-        result = prime * result + ((getMoney() == null) ? 0 : getMoney().hashCode());
-        result = prime * result + ((getWechatCode() == null) ? 0 : getWechatCode().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", nickname=").append(nickname);
-        sb.append(", realname=").append(realname);
-        sb.append(", password=").append(password);
-        sb.append(", icon=").append(icon);
-        sb.append(", sex=").append(sex);
-        sb.append(", state=").append(state);
-        sb.append(", invitationCode=").append(invitationCode);
-        sb.append(", inviterPeople=").append(inviterPeople);
-        sb.append(", birthday=").append(birthday);
-        sb.append(", registerTime=").append(registerTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", role=").append(role);
-        sb.append(", money=").append(money);
-        sb.append(", wechatCode=").append(wechatCode);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 }

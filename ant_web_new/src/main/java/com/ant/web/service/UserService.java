@@ -4,6 +4,7 @@ import com.ant.web.bean.Result;
 import com.ant.web.entity.User;
 import com.ant.web.request.ApplicationForm;
 import com.ant.web.request.RegisterForm;
+import com.ant.web.response.UserResponse;
 import org.springframework.validation.annotation.Validated;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public interface UserService {
-    Result login(String username, String password);
+    UserResponse login(String username, String password);
 
 
 

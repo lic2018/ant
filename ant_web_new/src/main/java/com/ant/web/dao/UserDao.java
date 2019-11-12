@@ -1,5 +1,7 @@
 package com.ant.web.dao;
 
+import com.ant.web.entity.Menu;
+import com.ant.web.entity.Role;
 import com.ant.web.entity.User;
 import com.ant.web.request.RegisterForm;
 import com.ant.web.response.UserResponse;
@@ -18,5 +20,10 @@ public interface UserDao extends MyBatisBaseDao<User, Integer> {
 
     UserResponse registerDetail(@Param("id") Integer id);
 
-    User findByUsername(String username);
+    UserResponse findByUsername(@Param("username") String username);
+
+    List<Role> getRolesByUserId(@Param("id") Integer id);
+
+    List<Menu> getMenuByUserId(@Param("id") Integer id);
+
 }

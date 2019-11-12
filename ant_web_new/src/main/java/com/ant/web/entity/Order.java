@@ -14,6 +14,11 @@ public class Order implements Serializable {
     private String code;
 
     /**
+     * 用户id
+     */
+    private Integer userId;
+
+    /**
      * 0 正常 1 星标
      */
     private String star;
@@ -96,6 +101,14 @@ public class Order implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getStar() {
@@ -216,85 +229,5 @@ public class Order implements Serializable {
 
     public void setExpressNo(String expressNo) {
         this.expressNo = expressNo;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Order other = (Order) that;
-        return (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
-            && (this.getStar() == null ? other.getStar() == null : this.getStar().equals(other.getStar()))
-            && (this.getMoney() == null ? other.getMoney() == null : this.getMoney().equals(other.getMoney()))
-            && (this.getPayment() == null ? other.getPayment() == null : this.getPayment().equals(other.getPayment()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getAddressee() == null ? other.getAddressee() == null : this.getAddressee().equals(other.getAddressee()))
-            && (this.getAddresseeTel() == null ? other.getAddresseeTel() == null : this.getAddresseeTel().equals(other.getAddresseeTel()))
-            && (this.getOrderTime() == null ? other.getOrderTime() == null : this.getOrderTime().equals(other.getOrderTime()))
-            && (this.getPayTime() == null ? other.getPayTime() == null : this.getPayTime().equals(other.getPayTime()))
-            && (this.getShipmentsTime() == null ? other.getShipmentsTime() == null : this.getShipmentsTime().equals(other.getShipmentsTime()))
-            && (this.getReceivingTime() == null ? other.getReceivingTime() == null : this.getReceivingTime().equals(other.getReceivingTime()))
-            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()))
-            && (this.getExpress() == null ? other.getExpress() == null : this.getExpress().equals(other.getExpress()))
-            && (this.getExpressNo() == null ? other.getExpressNo() == null : this.getExpressNo().equals(other.getExpressNo()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
-        result = prime * result + ((getStar() == null) ? 0 : getStar().hashCode());
-        result = prime * result + ((getMoney() == null) ? 0 : getMoney().hashCode());
-        result = prime * result + ((getPayment() == null) ? 0 : getPayment().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
-        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getAddressee() == null) ? 0 : getAddressee().hashCode());
-        result = prime * result + ((getAddresseeTel() == null) ? 0 : getAddresseeTel().hashCode());
-        result = prime * result + ((getOrderTime() == null) ? 0 : getOrderTime().hashCode());
-        result = prime * result + ((getPayTime() == null) ? 0 : getPayTime().hashCode());
-        result = prime * result + ((getShipmentsTime() == null) ? 0 : getShipmentsTime().hashCode());
-        result = prime * result + ((getReceivingTime() == null) ? 0 : getReceivingTime().hashCode());
-        result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
-        result = prime * result + ((getExpress() == null) ? 0 : getExpress().hashCode());
-        result = prime * result + ((getExpressNo() == null) ? 0 : getExpressNo().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", code=").append(code);
-        sb.append(", star=").append(star);
-        sb.append(", money=").append(money);
-        sb.append(", payment=").append(payment);
-        sb.append(", state=").append(state);
-        sb.append(", remark=").append(remark);
-        sb.append(", address=").append(address);
-        sb.append(", addressee=").append(addressee);
-        sb.append(", addresseeTel=").append(addresseeTel);
-        sb.append(", orderTime=").append(orderTime);
-        sb.append(", payTime=").append(payTime);
-        sb.append(", shipmentsTime=").append(shipmentsTime);
-        sb.append(", receivingTime=").append(receivingTime);
-        sb.append(", comment=").append(comment);
-        sb.append(", express=").append(express);
-        sb.append(", expressNo=").append(expressNo);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 }
