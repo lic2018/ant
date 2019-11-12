@@ -2,29 +2,22 @@ package com.ant.web.exception;
 
 public enum ExceptionCode {
 
- // SQL执行失败
+ /** SQL执行失败 */
  EX_SQL(50001),
 
+ /** 账号或密码错误 */
+ EX_USER_USERNAME_PASSWORD(10003),
+
+ /** 该用户不存在 */
+ EX_USER_NOT_FOUND(10004),
 
 
 
- // 注册失败
-  EX_USER_REGISTER(900),
- // 未登录
- EX_USER_NOT_LOGIN(901),
- EX_USER_USERNAME(902),
 
-  /** 用户不存在 */
-  EX_USER_NOT_FOUND(10001),
 
-  /** 手机号码所有者不合法 */
-  EX_USER_MOBILE_OWNER_INVALID(10002),
 
-  /** 手机号已被注册 */
-  EX_USER_EXIST(10003),
 
-  /** 该用户不存在，请先注册 */
-  EX_USER_REGIST(10004),
+
 
   /** 头像不能为空 */
   EX_USER_AVATAR_NOTNULL(10005),
