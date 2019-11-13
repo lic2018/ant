@@ -3,8 +3,7 @@ package com.ant.web.service.impl;
 import com.ant.web.bean.Result;
 import com.ant.web.dao.ActiveDao;
 import com.ant.web.entity.Active;
-import com.ant.web.entity.User;
-import com.ant.web.exception.CodeableException;
+import com.ant.web.exception.DefinedException;
 import com.ant.web.exception.ExceptionCode;
 import com.ant.web.request.ActiveForm;
 import com.ant.web.service.ActiveService;
@@ -37,7 +36,7 @@ public class ActiveServiceImpl implements ActiveService {
     public Result delete(Active active) {
         int update = activeDao.updateByPrimaryKeySelective(active);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return Result.success();
     }
@@ -46,7 +45,7 @@ public class ActiveServiceImpl implements ActiveService {
     public Result update(Active active) {
         int update = activeDao.updateByPrimaryKeySelective(active);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return Result.success();
     }

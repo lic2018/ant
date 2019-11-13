@@ -7,7 +7,7 @@ import com.ant.web.dao.UserApplicationDao;
 import com.ant.web.dao.UserDao;
 import com.ant.web.entity.User;
 import com.ant.web.entity.UserApplication;
-import com.ant.web.exception.CodeableException;
+import com.ant.web.exception.DefinedException;
 import com.ant.web.exception.ExceptionCode;
 import com.ant.web.request.ApplicationForm;
 import com.ant.web.request.RegisterForm;
@@ -18,9 +18,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.security.provider.MD5;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -40,11 +38,11 @@ public class UserServiceImple implements UserService {
     public UserResponse login(String username, String password) {
         UserResponse user = userDao.findByUsername(username);
         if (user == null ) {
-            throw new CodeableException(ExceptionCode.EX_USER_NOT_FOUND);
+            throw new DefinedException(ExceptionCode.EX_USER_NOT_FOUND);
         }
         // 密码没有加密
         if (!password.equals(user.getPassword())) {
-            throw new CodeableException(ExceptionCode.EX_USER_USERNAME_PASSWORD);
+            throw new DefinedException(ExceptionCode.EX_USER_USERNAME_PASSWORD);
         }
         user.setPassword(null);
         return user;
@@ -64,7 +62,7 @@ public class UserServiceImple implements UserService {
     public Result registerChange(User user) {
         int update = userDao.updateByPrimaryKeySelective(user);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return Result.success();
     }

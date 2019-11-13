@@ -22,9 +22,8 @@
   </resultMap>
 
   <resultMap id="userResultMap" type="com.ant.web.response.UserResponse" extends="BaseResultMap">
-    <result column="age" jdbcType="VARCHAR" property="age" />
     <collection property="roles" ofType="com.ant.web.entity.Role" select="com.ant.web.dao.UserDao.getRolesByUserId"
-                column="roles"></collection>
+                column="roles" ></collection>
     <collection property="menus" ofType="com.ant.web.entity.Menu" select="com.ant.web.dao.UserDao.getMenuByUserId"
                 column="menus"></collection>
   </resultMap>

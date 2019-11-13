@@ -16,8 +16,6 @@ import java.util.List;
 @Setter
 public class UserResponse extends User {
 
-    private Integer age;
-
     private List<Role> roles;
 
     private List<Menu> menus;

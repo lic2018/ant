@@ -29,10 +29,6 @@ public final class Result {
         return result;
     }
 
-    public static Result failure() {
-        return new Result(500, "请求异常", null);
-    }
-
     public static Result failure(int code, String message) {
         return new Result(code, message, null);
     }

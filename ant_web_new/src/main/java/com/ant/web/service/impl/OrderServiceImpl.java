@@ -3,8 +3,7 @@ package com.ant.web.service.impl;
 import com.ant.web.bean.Result;
 import com.ant.web.dao.OrderDao;
 import com.ant.web.entity.Order;
-import com.ant.web.entity.User;
-import com.ant.web.exception.CodeableException;
+import com.ant.web.exception.DefinedException;
 import com.ant.web.exception.ExceptionCode;
 import com.ant.web.request.OrderForm;
 import com.ant.web.response.OrderResponse;
@@ -38,7 +37,7 @@ public class OrderServiceImpl implements OrderService{
     public Result remark(Order order) {
         int update = orderDao.updateByPrimaryKeySelective(order);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return Result.success();
     }

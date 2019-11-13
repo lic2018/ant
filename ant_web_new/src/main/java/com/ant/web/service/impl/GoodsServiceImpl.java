@@ -4,7 +4,7 @@ import com.ant.web.bean.Result;
 import com.ant.web.dao.GoodsDao;
 import com.ant.web.entity.Goods;
 import com.ant.web.entity.User;
-import com.ant.web.exception.CodeableException;
+import com.ant.web.exception.DefinedException;
 import com.ant.web.exception.ExceptionCode;
 import com.ant.web.request.GoodsForm;
 import com.ant.web.service.GoodsService;
@@ -37,7 +37,7 @@ public class GoodsServiceImpl implements GoodsService{
     public Result update(Goods goods) {
         int update = goodsDao.updateByPrimaryKeySelective(goods);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return null;
     }
@@ -46,7 +46,7 @@ public class GoodsServiceImpl implements GoodsService{
     public Result off(Goods goods) {
         int update = goodsDao.updateByPrimaryKeySelective(goods);
         if (update != 1) {
-            throw new CodeableException(ExceptionCode.EX_SQL);
+            throw new DefinedException(ExceptionCode.EX_SQL);
         }
         return Result.success();
     }
