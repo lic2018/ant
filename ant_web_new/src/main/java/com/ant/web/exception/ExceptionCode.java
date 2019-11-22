@@ -14,6 +14,8 @@ public enum ExceptionCode {
     EX_USER_NOT_FOUND(10004, "该用户不存在"),
 
     EX_SQL(50001, "SQL执行异常"),
+
+    EX_MISSINGSERVLETREQUESTPARAMETER(90001,"缺少必要参数"),
     EX_SYSTEM(99999, "系统异常");
 
 
