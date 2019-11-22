@@ -3,6 +3,7 @@ package com.ant.web.controller;
 import com.ant.web.bean.Result;
 import com.ant.web.entity.User;
 import com.ant.web.request.ApplicationForm;
+import com.ant.web.request.MustForm;
 import com.ant.web.request.RegisterForm;
 import com.ant.web.response.UserResponse;
 import com.ant.web.service.UserService;
@@ -25,7 +26,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("user")
 public class UserController {
 
-
     @Autowired
     private UserService userService;
 
@@ -44,7 +44,12 @@ public class UserController {
         UserResponse userResponse = userService.login(username, password);
         session.setAttribute("userId", userResponse.getId());
         return Result.success(userResponse);
+    }
 
+    @RequestMapping("must")
+    public Result must(@RequestBody MustForm form) {
+        boolean b = userService.must(form);
+        return Result.success(b);
     }
 
     @RequestMapping("registerList")

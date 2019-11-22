@@ -23,7 +23,7 @@
 
   <resultMap id="userResultMap" type="com.ant.web.response.UserResponse" extends="BaseResultMap">
     <collection property="roles" ofType="com.ant.web.entity.Role" select="com.ant.web.dao.UserDao.getRolesByUserId"
-                column="roles" ></collection>
+                column="id" ></collection>
     <collection property="menus" ofType="com.ant.web.entity.Menu" select="com.ant.web.dao.UserDao.getMenuByUserId"
                 column="menus"></collection>
   </resultMap>
@@ -257,10 +257,10 @@
   </select>
 
 
-  <select id="registerDetail" resultMap="registerResultMap">
+<!--  <select id="registerDetail" resultMap="registerResultMap">
     select id, nickname, sex, invitation_code, inviter_name,inviter_id, register_time, money, TIMESTAMPDIFF(YEAR, birthday, CURDATE()) age
     from user where id = #{id}
-  </select>
+  </select>-->
 
   <select id="findByUsername" parameterType="string" resultMap="userResultMap">
     select * from user where username = #{username}

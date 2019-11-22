@@ -10,6 +10,7 @@ import com.ant.web.entity.UserApplication;
 import com.ant.web.exception.DefinedException;
 import com.ant.web.exception.ExceptionCode;
 import com.ant.web.request.ApplicationForm;
+import com.ant.web.request.MustForm;
 import com.ant.web.request.RegisterForm;
 import com.ant.web.response.UserResponse;
 import com.ant.web.service.UserService;
@@ -95,6 +96,11 @@ public class UserServiceImple implements UserService {
         userApplication.setState(BaseConst.STATE.DELETE);
         userApplicationDao.updateByPrimaryKeySelective(userApplication);
         return Result.success();
+    }
+
+    @Override
+    public boolean must(MustForm form) {
+        return true;
     }
 
 
