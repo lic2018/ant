@@ -24,8 +24,8 @@
   <resultMap id="userResultMap" type="com.ant.web.response.UserResponse" extends="BaseResultMap">
     <collection property="roles" ofType="com.ant.web.entity.Role" select="com.ant.web.dao.UserDao.getRolesByUserId"
                 column="id" ></collection>
-    <collection property="menus" ofType="com.ant.web.entity.Menu" select="com.ant.web.dao.UserDao.getMenuByUserId"
-                column="menus"></collection>
+    <collection property="menus" ofType="com.ant.web.entity.Menu" select="com.ant.web.dao.UserDao.getMenusByUserId"
+                column="id"></collection>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -275,7 +275,7 @@
   <select id="getMenusByUserId" parameterType="int" resultType="com.ant.web.entity.Menu">
     SELECT m.*
     from user u, user_role ur, menu_role mr, menu m
-    where u.id = #{id} and u.id = ur.user_id and ur.role_id = mr.rid and mr.mid = m.id
+    where u.id = #{id} and u.id = ur.user_id and ur.role_id = mr.rid and mr.mid = m.id and m.enabled = '0'
   </select>
 
 </mapper>

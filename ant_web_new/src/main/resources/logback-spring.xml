@@ -3,7 +3,7 @@
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
     <!-- dev文件路径 -->
-    <property name="DEV_FILE_PATH" value="C:/logs/web/dev"/>
+    <property name="DEV_FILE_PATH" value="C:/logs/ant/web/dev"/>
     <!-- TEST文件路径 -->
     <property name="TEST_FILE_PATH" value="/opt/ddw/logs/web/test"/>
     <!-- prod文件路径 -->
@@ -104,37 +104,32 @@
 
 
     <springProfile name="dev">
-
+        <!-- 输出到打印台 -->
         <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>${PATTERN}</pattern>
             </encoder>
         </appender>
-
-
-        <!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
         <appender name="DEV_FILE"
                   class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <!--<Encoding>UTF-8</Encoding>-->
             <File>${DEV_FILE_PATH}/web.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <FileNamePattern>${PRO_FILE_PATH}/web.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <FileNamePattern>${DEV_FILE_PATH}/web.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <MaxHistory>30</MaxHistory>
                 <TimeBasedFileNamingAndTriggeringPolicy
                         class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                    <MaxFileSize>50MB</MaxFileSize>
+                    <MaxFileSize>10MB</MaxFileSize>
                 </TimeBasedFileNamingAndTriggeringPolicy>
             </rollingPolicy>
             <layout class="ch.qos.logback.classic.PatternLayout">
                 <pattern>${PATTERN}</pattern>
             </layout>
         </appender>
+        <!-- 输出的日志级别 -->
         <root level="debug">
-
-            <appender-ref ref="DEV_FILE"/>
             <appender-ref ref="STDOUT"/>
+            <appender-ref ref="DEV_FILE"/>
             <appender-ref ref="FILEERROR"/>
-
         </root>
     </springProfile>
 

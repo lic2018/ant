@@ -7,12 +7,10 @@ import com.ant.web.request.MustForm;
 import com.ant.web.request.RegisterForm;
 import com.ant.web.response.UserResponse;
 import com.ant.web.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -40,15 +39,16 @@ public class UserController {
     @RequestMapping("login")
     public Result login(@RequestParam(value = "username", required = true) String username, @RequestParam(value = "password", required = true) String password,
                         HttpSession session) {
-
         UserResponse userResponse = userService.login(username, password);
         session.setAttribute("userId", userResponse.getId());
         return Result.success(userResponse);
     }
 
     @RequestMapping("must")
-    public Result must(@RequestBody MustForm form) {
+    public Result must(@RequestBody MustForm form, HttpSession session, @SessionAttribute int userId) {
         boolean b = userService.must(form);
+        log.info("userId:" + userId);
+        log.info(session.getAttribute("userId").toString());
         return Result.success(b);
     }
 
